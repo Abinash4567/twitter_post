@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check if Div is Out of Screen</title>
+    <style>
+        #myDiv {
+            width: 200px;
+            height: 200px;
+            background-color: lightblue;
+            position: absolute;
+            top: 150%; 
+            left: 50%; 
+        }
+    </style>
+</head>
+<body>
+    <div id="myDiv">I'm a div!</div>
+
+    <script>
+        function isElementOutOfViewport(el) {
+            const rect = el.getBoundingClientRect();
+            console.log(rect);
+
+            return (
+                rect.top >= (window.innerHeight || document.documentElement.clientHeight) ||
+                rect.left >= (window.innerWidth || document.documentElement.clientWidth) ||
+                rect.bottom <= 0 ||
+                rect.right <= 0
+            );
+        }
+
+        setInterval(()=>{
+            const myDiv = document.getElementById('myDiv');
+            if (isElementOutOfViewport(myDiv)) {
+                console.log('The div is out of the screen!');
+            } else {
+                console.log('The div is within the screen.');
+            }}, 2000);
+    </script>
+</body>
+</html>
